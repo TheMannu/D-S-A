@@ -1,0 +1,27 @@
+//Time complexity is O(n)
+//space complexity is O(1)
+
+package ClassArray;
+
+public class Revershal 
+{
+    public static void main(String[] args) 
+    {
+        int[] array={1,3,5,8,10};
+        int n = array.length;
+
+        for (int i = 0; i< n/2; i++)
+        {
+        //swap elements between arr(i) and arr(n-i-1)
+        int temp = array[i];
+        array[i] = array[n-i-1];
+        array[n-i-1] = temp;
+        }
+    System.out.println("Revershal of array is: ");
+    for(int i=0; i<n; i++)
+    {
+        System.out.print(array[i]+ " ");
+    }
+    System.out.println();
+    }
+}
