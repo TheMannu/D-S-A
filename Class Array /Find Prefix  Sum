@@ -1,0 +1,85 @@
+package ClassArray;
+import java.util.*;
+
+public class PrefixSum 
+{
+    public static void prefixSumMatrix(int[][] array){
+        int m = array.length;
+        int n = array[0].length;
+
+        // traverse the array row wise to calculate the row wise prefix sum
+        for(int i=0; i<m; i++){
+           for(int j=1; j<n; j++){
+            array[i][j] += array[i][j-1];
+           }
+        }
+        // traverse the array column wise to calculate column wise prefix sum
+        //final 2d matrix 
+        for(int j=0; j<n; j++){
+            for (int i=1; i<m; i++){
+                array[i][j] += array[i-1][j];
+            }
+        }
+    }
+    public static int sumRegion(int[][] array,int r1,int c1,int r2,int c2)
+    {
+        int sum = 0, up = 0 , left = 0 , repeatedRegion = 0 , result = 0;
+        sum = array[r2][c2];
+        up = array[r1-1][c2];
+        left = array[r2][c1-1];
+        repeatedRegion = array[r1-1][c1-1];
+        result = sum - up - left + repeatedRegion;
+        return result;
+    }
+  public static int findSumMatrix(int[][] array,int r1,int c1,int r2,int c2)
+  {
+    int sum = 0;
+    for(int i=r1; i<r2; i++)
+    {
+      for(int j=c1; j<c2; j++)
+      {
+        sum += array[i][j];
+      }
+    }
+      return sum;      
+  }
+  public static void main(String[] args) 
+  {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter Number Of Rows");
+    int m = sc.nextInt();
+
+    System.out.println("Enter Number Of Columns");
+    int n = sc.nextInt();
+
+    int array[][] = new int [m][n];
+
+    System.out.println("Enter The Matrix Elements");
+    for(int i=0; i<m; i++)
+    {
+      for(int j=0; j<n; j++)
+      {
+        array[i][j] = sc.nextInt();
+      }
+    }
+    int r1,c1,r2,c2;
+
+    System.out.print("Enter the value of r1 coordinate;");
+    r1 = sc.nextInt();
+
+    System.out.print("Enter the value of c1 coordinate;");
+    c1 = sc.nextInt();
+
+    System.out.print("Enter the value of r2 coordinate;");
+    r2 = sc.nextInt();
+
+    System.out.print("Enter the value of c2 coordinate;");
+    c2 = sc.nextInt();
+
+    //Function Calling
+    //int result = findSumMatrix( array, r1, c1, r2, c2);
+    prefixSumMatrix(array);
+    int result = sumRegion(array, r1, c1, r2, c2);
+    System.out.println("Prefix Sum Of GIven number Is :"+ result);
+  }
+}
