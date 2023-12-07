@@ -1,0 +1,21 @@
+package ClassArray;
+
+public class MissingElement {
+    public static void main(String[] args) 
+    {
+     int[] array = {1,2,4,7,6,5};
+     int n = array.length;
+     //sum of natural numbers in an array 
+     int sumOfNaturalNumaber = ((n+1)*(n+2))/2;
+     int sum = 0;
+     // sum of elements present in given array 
+     for (int i=0; i<n; i++)
+     {
+        sum += array[i];
+     }   
+
+     int missingElem = 0;
+     missingElem = sumOfNaturalNumaber - sum;
+     System.out.println("Missing Number Is :" + missingElem);
+    }
+}
