@@ -1,0 +1,89 @@
+package DivideConqure;
+
+public class MergeSort{
+
+    //function to do the combine task in mergesort -merge Procedure
+    //l += left array ,, and r = right array
+    public static void mergeProducer(int[] arr, int l, int mid, int r){
+        int i,j,k;
+        //size of left and right array
+        int n1 = mid -l + 1;
+        int n2 = r - mid;
+
+        // initialise left and right subarray
+        int[] leftsubarray = new int [n1];
+        int[] rightsubarray = new int [n2];
+
+        // copy the data into left and right subarray
+        for (i = 0; i<n1; i++){
+            leftsubarray[i] = arr[l+1];
+        }
+        for (j=0; j<n2; j++){
+            rightsubarray[j] = arr[mid+1 +j];
+        }
+
+        //comparison between left and right subarray
+        i = 0;
+        j = 0;
+         k = l;
+         while(i < n1 && j < n2){
+            if(leftsubarray[i] <= rightsubarray[j]){
+                arr[k] = leftsubarray[i];
+                i = i + 1;
+            }
+            else{
+                arr[k] = rightsubarray[j];
+                j = j + 1;
+            }
+            k = k + 1;
+         }
+         // copyiny all the elements in the leftsubarray
+         while(i < n1){
+            arr[k] = leftsubarray[i];
+            i = i+1;
+            k = k+1;
+         }
+         // copyiny all the elements in the rightsubarray
+         while (j<n2){
+            arr[k] = rightsubarray[j];
+            j = j + 1;
+            k = k + 1;
+         }
+
+    }
+
+
+    // function  to do the merge sort
+    public static void mergeSort(int[] arr, int i, int j){
+        if (i<j){
+            //1. devide the array into two subproblems
+            int mid = i + (j-i)/2;
+            //2. conqure the subproblem using recursion
+            // left subarray
+            mergeSort(arr, i , mid);
+            // right subarray
+            mergeSort(arr, mid+1, j);
+            //3. combine the problem of all subproblem 
+            mergeProducer(arr,i,mid,j);    
+
+        }
+    }
+    //function to display the array
+    public static void printArr(int[]arr,int n){
+        for (int i = 0; i<n; i++){
+            System.out.println(arr[i]+ " ");
+        }
+    }
+    public static void main(String[] args) {
+        int [] arr = {50,20,40,90,88,11,13};
+        int n = arr.length;
+
+        System.out.print("array before sorting is: ");
+        printArr(arr,n);
+
+        mergeSort(arr,0,n-1);
+
+        System.out.print("array after sorting is: ");
+        printArr(arr,n);
+    }
+}
