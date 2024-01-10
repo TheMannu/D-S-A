@@ -1,0 +1,60 @@
+import java.util.*;
+public class selectionProcedure {
+   
+    public static int partition(int[] arr, int l, int h){
+        int i = l;
+        //pivot is the first element in an array
+        int pivot = arr[l];
+
+        for (int j = l+1; j<=h; j++){
+            // j is to take care of the biger elements then the pivot
+            // i is to take care of the smaller elements then the pivot
+            if (arr[j]<= pivot){
+                i = i + 1;
+                // swap arr[i], arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    // swap (arr[l], arr[i])
+    //to return the corect index of the pivot element
+    int temp = arr[l];
+    arr[l] = arr[i];
+    arr[i] = temp;
+    
+    return i;
+    }
+
+    // function to impement the kth smallest element finding in an array
+    public static int selectionProcedure(int[] arr,int l, int h, int k) {
+        // 1. dividing the array 
+        int m = partition(arr,l,h);
+        //relationship between index number and position number
+        if (m == k-1){
+            return arr[m];
+        }
+        //traversing toward right side of an array 
+        else if (m < k-1){
+            return selectionProcedure(arr,m+1, h, k);
+        }
+        // traversing to ward left side of an array
+        else return selectionProcedure(arr, l, m-1, k);
+             
+    }
+    
+
+    public static void main(String[] args) {
+    int[] arr = {50,20,70,90,10,30,80};
+    int n = arr.length;
+    int k = 3;   
+    
+    int result = selectionProcedure(arr,0,n-1,k);
+        System.out.println("kth smallest element in an array is "+ result);
+
+    int result1 = selectionProcedure(arr, 0, n-1, n-k+1);
+        System.out.println("The kth largest element in an array is: "+result1);
+    
+    }
+    
+}
